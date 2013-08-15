@@ -6,10 +6,19 @@
 </p>
 
 <p>
-  <b>Age:</b>
-  <%= @user.age %>
+  <b>Email:</b>
+  <%= @user.email %>
 </p>
 
+<p>
+  <b>Phone:</b>
+  <%= @user.phone %>
+</p>
+
+<p>
+  <b>Role:</b>
+  <%= @user.role %>
+</p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
