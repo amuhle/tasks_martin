@@ -1,0 +1,26 @@
+<h1>Tasks#index</h1>
+
+<table border="1">
+  <tr>
+    <th>Description</th>
+    <th>Status</th>
+    <th>Time to Finish</th>
+    <th>Title</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @tasks.each do |task| %>
+  <tr>
+    <td><%= task.description %></td>
+    <td><%= task.status %></td>
+    <td><%= task.time_to_finish %></td>
+    <td><%= task.title %></td>
+    <td><%= link_to 'Show', [@user, task] %></td>
+    <td><%= link_to 'Edit', edit_user_task_path(@user, task) %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'New Task', new_user_task_path(@user) %></td>
+

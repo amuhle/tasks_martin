@@ -1,0 +1,23 @@
+<h1>Tasks#show</h1>
+
+<p>
+  <b>Description:</b>
+  <%= @task.description %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @task.status %>
+</p>
+
+<p>
+  <b>Time to finish:</b>
+  <%= @task.time_to_finish %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @task.title %>
+</p>
+
+<%= link_to 'Users Tasks', user_tasks_path(@user) %>

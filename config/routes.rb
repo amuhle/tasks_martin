@@ -1,5 +1,11 @@
 Tasks::Application.routes.draw do
-  resources :users, except: :destroy
+  #get "tasks/index"
+  #get "tasks/new"
+
+  resources :users, except: :destroy do
+    resources :tasks, except: [:destroy]
+  end
+
 
   #get "users/edit"
   #get "users/index"
