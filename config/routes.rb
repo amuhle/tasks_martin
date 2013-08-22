@@ -1,16 +1,9 @@
 Tasks::Application.routes.draw do
-  #get "tasks/index"
-  #get "tasks/new"
 
-  resources :users, except: :destroy do
+  resources :users do
     resources :tasks, except: [:destroy]
   end
 
-
-  #get "users/edit"
-  #get "users/index"
-  #get "users/new"
-  #get "users/show"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

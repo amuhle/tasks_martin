@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   end
 
   def index
-  	@users = User.all
+  	@users = User.active
   end
 
   def new
@@ -25,4 +25,14 @@ class UsersController < ApplicationController
     @user.update_attributes(params[:user])
     redirect_to users_path
   end
+
+=begin
+  def destroy
+    @user = User.find(params[:id])
+    @user.status = "inactive"
+    #@user.save
+    #@user.destroy
+    redirect_to users_path
+  end
+=end
 end

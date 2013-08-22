@@ -1,5 +1,29 @@
 require 'spec_helper'
 
+
 describe User do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+	before(:each) do
+    @user = User.new
+  end
+
+  it "respond to email, name, phone, role, status and relationship" do
+  	@user.should respond_to(:email)
+  	@user.should respond_to(:name)
+  	@user.should respond_to(:phone)
+  	@user.should respond_to(:role)
+  	@user.should respond_to(:status)
+  end
+
+  it "relationship has many tasks" do
+  	@user.should have_many(:tasks)
+  end
+
+  it "test scopes" do
+  	user_active = User.create(:status => "active")
+  	User.active.should include(user_active)
+
+  	user_inactive = User.create()
+  	User.active.should_not include(user_inactive)
+	end
 end

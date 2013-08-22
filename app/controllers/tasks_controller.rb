@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
 
-	before_filter :get_user, :only => [:index, :show, :create, :edit, :update, :new]
+	before_filter :get_user
 
 	def get_user
 		@user = User.find(params[:user_id])
@@ -15,11 +15,12 @@ class TasksController < ApplicationController
   end
 
   def edit
-  	@task = Task.find(params[:id])
+  	@task = @user.tasks.find(params[:id])
+
   end
 
   def update
-  	@task = Task.find(params[:id])
+  	@task = @user.tasks.find(params[:id])
   	@task.update_attributes(params[:task])
     redirect_to [@user, @task]
   end

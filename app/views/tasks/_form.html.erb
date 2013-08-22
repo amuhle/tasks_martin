@@ -5,7 +5,7 @@
   </div>
   <div class="field">
     <%= f.label :status %><br />
-    <%= f.select :status, ['unstarted','started','finished'] %>
+    <%= f.select :status, Task::STATUS %>
   </div>
   <div class="field">
     <%= f.label :time_to_finish %><br />
