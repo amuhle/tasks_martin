@@ -20,10 +20,12 @@ describe User do
   end
 
   it "test scopes" do
-  	user_active = User.create(:status => "active")
+  	user_active = User.create()
   	User.active.should include(user_active)
 
   	user_inactive = User.create()
+    user_inactive.status = "inactive"
+    user_inactive.save
   	User.active.should_not include(user_inactive)
 	end
 end
