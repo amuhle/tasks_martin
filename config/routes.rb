@@ -1,6 +1,9 @@
 Tasks::Application.routes.draw do
 
-  resources :users do
+  resources :users, except: :destroy do
+    member do
+      put "delete_status"
+    end
     resources :tasks, except: [:destroy]
   end
 

@@ -24,9 +24,8 @@
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Show Tasks', user_tasks_path(user) %></td>
         <td><%= link_to 'New Task', new_user_task_path(user) %></td>
-        <td><%= link_to 'Destroy User', user, method: :delete, :class => "destroy_user"%></td>
+        <td><%= link_to 'Delete User', user, method: :delete, :class => "delete_user"%></td>
         <input type="hidden" value="<%= user.id %>" class="user_id" />
-        <%= hidden_field "user", "id" , :value => user.id %>
       </tr>
 
   <% end %>

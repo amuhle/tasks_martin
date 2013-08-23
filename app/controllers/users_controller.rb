@@ -26,13 +26,17 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
-=begin
-  def destroy
-    @user = User.find(params[:id])
-    @user.status = "inactive"
-    #@user.save
-    #@user.destroy
-    redirect_to users_path
+
+  def delete_status
+    user = User.find(params[:id])
+    user.status = "inactive"
+    respond_to do |format|
+      if user.save
+        format.json { render json: {status: "saved"} }
+      else
+        format.json render json: {status: "unsaved"}
+      end
+    end
   end
-=end
+
 end

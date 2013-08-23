@@ -54,7 +54,6 @@ describe TasksController do
     end
 
     it "renders the edit template" do
-      #expect(response).to render_template edit_user_task_path(user,task)
       get 'edit', user_id: user.id, id: task.id
       expect(response).to render_template("edit")
     end

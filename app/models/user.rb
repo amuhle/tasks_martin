@@ -5,4 +5,11 @@ class User < ActiveRecord::Base
 
   scope :active, -> { where(status: 'active') }
 
+  after_create :default_active
+
+  def default_active
+  	self.status = "active"
+  	self.save!
+  end
+
 end
