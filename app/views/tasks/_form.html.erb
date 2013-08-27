@@ -1,21 +1,40 @@
-<%= form_for([@user, @task]) do |f| %>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_field :description %>
+<%= form_for [@user, @task], :html => { :class => 'form-horizontal' } do |f| %>
+
+  <%title_precence = @task.errors.messages[:title].present?%>
+  <div class="control-group <%= title_precence ? "error" : ""%>">
+    <%= f.label :title, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :title, :class => 'text_field' %>
+      <span class="help-inline"><%= title_precence ? "Title can't be blank" : ""%></span>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :status %><br />
-    <%= f.select :status, Task::STATUS %>
+
+  <%description_precence = @task.errors.messages[:description].present?%>
+  <div class="control-group <%= description_precence ? "error" : ""%>">
+    <%= f.label :description, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :description, :class => 'text_field' %>
+      <span class="help-inline"><%= description_precence ? "Description can't be blank" : ""%></span>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :time_to_finish %><br />
-    <%= f.date_select(:time_to_finish)%>
+
+  <div class="control-group">
+    <%= f.label :time_to_finish, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.date_select :time_to_finish, :class => 'date_select' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
+
+  <div class="control-group">
+    <%= f.label :status, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :status, Task::STATUS %>
+    </div>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                user_tasks_path(@user), :class => 'btn' %>
   </div>
 <% end %>

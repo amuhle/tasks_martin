@@ -21,14 +21,26 @@ class TasksController < ApplicationController
 
   def update
   	@task = @user.tasks.find(params[:id])
-  	@task.update_attributes(params[:task])
-    redirect_to [@user, @task]
+  	@task.assign_attributes(params[:task])
+    if @task.changed? & @task.save
+      flash[:success] = "Task was successfully edited."
+      redirect_to [@user, @task]
+    else
+      flash[:error] = "You must change at least one parameter"
+      render 'edit'
+    end
   end
 
   def create
-  	@task = Task.create(params[:task])
-  	@user.tasks << @task
-  	redirect_to [@user, @task]
+    @task = Task.new(params[:task])
+    @user.tasks << @task
+    if @task.save
+      @user.tasks << @task
+      flash[:success] = "Task was successfully created."
+      redirect_to [@user, @task]
+    else
+      render 'new'
+    end
   end
 
   def show

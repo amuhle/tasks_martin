@@ -5,7 +5,7 @@ describe UsersController do
 
   describe "GET 'edit'" do
     before(:each) do
-      @user = User.create
+      @user = User.create(email: "email", name: "name", phone: 123, role: "role")
     end
 
     it "returns http success" do
@@ -38,7 +38,7 @@ describe UsersController do
 
     it "populates an array of users" do
       User.delete_all
-      @user = User.create(status: "active")
+      @user = User.create(status: "active", email: "email", name: "name", phone: 123, role: "role")
       get 'index'
       expect(assigns(:users)).to eq([@user])
     end
@@ -60,7 +60,7 @@ describe UsersController do
 
   describe "GET 'show'" do
     before(:each) do
-      @user = User.create
+      @user = User.create(email: "email", name: "name", phone: 123, role: "role")
     end
 
     it "returns http success" do
@@ -79,18 +79,17 @@ describe UsersController do
 
 
   describe "POST 'create'" do
-    let(:user) {User.new}
 
     it "creates a new contact" do
       expect{
-        post :create, user
+        post :create, user: {email: "email", name: "name", phone: 123, role: "role", status: "active"}
       }.to change(User, :count).by(1)
       response.should redirect_to users_path
     end
   end
 
   describe "PUT 'update'" do
-    let(:user) {User.create}
+    let(:user) {User.create(email: "email", name: "name", phone: 123, role: "role")}
 
     it "changes users's attributes" do
       user.name = "Pepe"
@@ -100,7 +99,7 @@ describe UsersController do
     end
 
     it "redirecto to users_path" do
-      put 'update', id: user.id
+      put 'update', id: user.id, user: {name: "new name"}
       response.should redirect_to users_path
     end
 
@@ -108,6 +107,18 @@ describe UsersController do
       put 'update', id: user.id
       assigns(:user).should eq(user)
     end
+  end
+
+  describe "PUT delete_status" do
+
+    let(:user) {User.create(email: "email", name: "name", phone: 123, role: "role")}
+
+    it "change status to 'inactive'" do
+      put 'delete_status', id: user.id
+      user.reload
+      user.status.should eq("inactive")
+    end
+
   end
 
 end

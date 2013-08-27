@@ -4,12 +4,13 @@ describe TasksController do
 
 
   let!(:user){
-    User.create(status: "active")
+    User.create(email: "email", name: "name", phone: 123, role: "role", status: "active")
   }
 
   let!(:task) do
-    tsk=Task.create
+    tsk=Task.new(description: "descripcion", status: "started", time_to_finish: Date.new, title: "title")
     user.tasks<<tsk
+    tsk.save
     tsk
   end
 
@@ -26,7 +27,6 @@ describe TasksController do
     end
 
     it "populates an array of tasks" do
-      user.tasks << task
       get 'index', user_id: user.id
       expect(assigns(:tasks)).to eq([task])
       expect(assigns(:user)).to eq(user)
@@ -85,11 +85,10 @@ describe TasksController do
   end
 
   describe "POST 'create'" do
-    let(:new_task) {Task.new(title: "titulo")}
 
     it "creates a new task" do
       expect{
-        post :create, user_id: user.id, task: {title: "#{new_task.title}"}
+        post :create, user_id: user.id, task: {description: "descripcion1", status: "started", time_to_finish: Date.new, title: "title1"}
       }.to change(user.tasks, :count).by(1)
       new_task = user.tasks.last
       response.should redirect_to user_task_path(user, new_task)
@@ -106,7 +105,8 @@ describe TasksController do
     end
 
     it "redirecto to user_task_path" do
-      put 'update', user_id: user.id, id: task.id
+      task.title = "titulo"
+      put 'update', user_id: user.id, id: task.id, task:{title: "#{task.title}"}
       response.should redirect_to user_task_path(user, task)
     end
 

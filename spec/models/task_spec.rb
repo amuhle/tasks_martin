@@ -17,4 +17,11 @@ describe Task do
   	@task.should belong_to(:user)
   end
 
+  it "should validate presence of" do
+    @task.should have(1).error_on(:description)
+    @task.should have(1).error_on(:status)
+    @task.should have(1).error_on(:time_to_finish)
+    @task.should have(1).error_on(:title)
+    @task.should have(1).error_on(:user)
+  end
 end

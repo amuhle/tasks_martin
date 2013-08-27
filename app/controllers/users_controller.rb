@@ -16,14 +16,25 @@ class UsersController < ApplicationController
   end
 
   def create
-  	@user = User.create(params[:user])
-  	redirect_to users_path
+  	@user = User.new(params[:user])
+    if @user.save
+      flash[:success] = "User was successfully created."
+      redirect_to users_path
+    else
+      render 'new'
+    end
   end
 
   def update
     @user = User.find(params[:id])
-    @user.update_attributes(params[:user])
-    redirect_to users_path
+    @user.assign_attributes(params[:user])
+    if @user.changed? & @user.save
+      flash[:success] = "User was successfully edited."
+      redirect_to users_path
+    else
+      flash[:error] = "You must change at least one parameter"
+      render 'edit'
+    end
   end
 
 

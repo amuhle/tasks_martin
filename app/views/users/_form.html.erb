@@ -1,22 +1,44 @@
-<%= form_for(@user) do |f| %>
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+<%= form_for @user, :html => { :class => 'form-horizontal' } do |f| %>
+
+  <%name_precence = @user.errors.messages[:name].present?%>
+  <div class="control-group <%= name_precence ? "error" : ""%>">
+    <%= f.label :name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'text_field' %>
+      <span class="help-inline"><%= name_precence ? "Name can't be blank" : ""%></span>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
+
+  <%email_precence = @user.errors.messages[:email].present?%>
+  <div class="control-group <%= email_precence ? "error" : ""%>">
+    <%= f.label :email, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :email, :class => 'text_field' %>
+      <span class="help-inline"><%= email_precence ? "Email can't be blank" : ""%></span>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :phone %><br />
-    <%= f.text_field :phone %>
+
+  <%phone_precence = @user.errors.messages[:phone].present?%>
+  <div class="control-group <%= phone_precence ? "error" : ""%>">
+    <%= f.label :phone, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :phone, :class => 'text_field' %>
+      <span class="help-inline"><%= phone_precence ? "Phone can't be blank" : ""%></span>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :role %><br />
-    <%= f.text_field :role %>
+
+  <%role_precence = @user.errors.messages[:role].present?%>
+  <div class="control-group <%= role_precence ? "error" : ""%>">
+    <%= f.label :role, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :role, :class => 'text_field' %>
+      <span class="help-inline"><%= role_precence ? "Role can't be blank" : ""%></span>
+    </div>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                users_path, :class => 'btn' %>
   </div>
 <% end %>
-

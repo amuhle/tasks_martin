@@ -20,12 +20,19 @@ describe User do
   end
 
   it "test scopes" do
-  	user_active = User.create()
+  	user_active = User.create(email: "email", name: "name", phone: 123, role: "role")
   	User.active.should include(user_active)
 
-  	user_inactive = User.create()
+  	user_inactive = User.create(email: "email1", name: "name1", phone: 123, role: "role1")
     user_inactive.status = "inactive"
     user_inactive.save
   	User.active.should_not include(user_inactive)
 	end
+
+  it "should validate presence of" do
+    @user.should have(1).error_on(:email)
+    @user.should have(1).error_on(:name)
+    @user.should have(1).error_on(:phone)
+    @user.should have(1).error_on(:role)
+  end
 end

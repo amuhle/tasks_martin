@@ -1,23 +1,21 @@
-<h1>Tasks#show</h1>
+<%- model_class = Task -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
 
-<p>
-  <b>Description:</b>
-  <%= @task.description %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
+  <dd><%= @task.title %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+  <dd><%= @task.description %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:time_to_finish) %>:</strong></dt>
+  <dd><%= @task.time_to_finish %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:status) %>:</strong></dt>
+  <dd><%= @task.status %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
+  <dd><%= @task.user_id %></dd>
+</dl>
 
-<p>
-  <b>Status:</b>
-  <%= @task.status %>
-</p>
-
-<p>
-  <b>Time to finish:</b>
-  <%= @task.time_to_finish %>
-</p>
-
-<p>
-  <b>Title:</b>
-  <%= @task.title %>
-</p>
-
-<%= link_to 'Users Tasks', user_tasks_path(@user) %>
+<div class="form-actions">
+  <%= link_to 'Users Tasks', user_tasks_path(@user), :class => 'btn'  %>
+</div>
