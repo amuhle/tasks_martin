@@ -50,4 +50,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def sistem_tasks
+    @tasks = Task.all.sort_by { |x| [x.status == 'started' ? 1 : x.status == 'unstarted' ? 2 : 3, x.created_at]}
+  end
+
+  def reasign_task
+    task = Task.find(params[:task_id])
+    task.user_id = params[:task][:user]
+    task.save
+  end
+
 end

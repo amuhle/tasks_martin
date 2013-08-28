@@ -34,12 +34,38 @@
 .btn.btn-mini {
 	&.show_tasks {
 		background-image: linear-gradient(to bottom, #ffffff, #76F0D3);
+		&.btn:hover{
+			background-color: #76f0d3;
+		}
 	}
 	&.new_task {
 		background-image: linear-gradient(to bottom, #ffffff, #7983F1);
+		&.btn:hover{
+			background-color: #7983f1;
+		}
 	}
 }
 
-.page-header{
-	background-color: greenyellow;
+.navbar-inner{
+	background-image: linear-gradient(to bottom, #333333, #333333);
+	min-height: 80px;
+}
+
+.navbar{
+	padding-top: 10px;
+	.brand{
+		color: #DFDFDF;
+		padding: 30px 20px 10px
+	}
+	.nav li{
+		padding-top: 20px;
+		a{
+			color: #DADADA;
+		}
+	}
+	.nav li a:hover{
+		color: greenyellow;
+		background-color: gray;
+		border-radius: 10px;
+	}
 }

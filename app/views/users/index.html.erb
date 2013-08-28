@@ -1,7 +1,13 @@
 <%- model_class = User -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+<div class="navbar">
+  <div class="navbar-inner">
+    <b class="brand" >Users</b>
+    <ul class="nav">
+      <li><a href="<%= sistem_tasks_users_path%>">Sistem Tasks</a></li>
+    </ul>
+  </div>
 </div>
+
 <table class="table table table-hover">
   <thead>
     <tr>
@@ -26,6 +32,7 @@
         <td><%= user.status %></td>
         <td><%=l user.created_at %></td>
         <td>
+          <%= link_to 'Show', user_path(user), :class => 'btn btn-mini' %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_user_path(user), :class => 'btn btn-mini btn-info' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),

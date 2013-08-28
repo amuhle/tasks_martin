@@ -1,10 +1,10 @@
 Tasks::Application.routes.draw do
 
   resources :users, except: :destroy do
-    member do
-      put "delete_status"
-    end
-    resources :tasks, except: [:destroy]
+    put :delete_status, on: :member
+    get :sistem_tasks, on: :collection
+    get :reasign_task, on: :collection
+    resources :tasks, except: :destroy
   end
 
 
