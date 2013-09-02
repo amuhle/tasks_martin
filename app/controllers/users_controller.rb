@@ -50,7 +50,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def sistem_tasks
+  def system_tasks
     @tasks = Task.all.sort_by { |x| [x.status == 'started' ? 1 : x.status == 'unstarted' ? 2 : 3, x.created_at]}
   end
 

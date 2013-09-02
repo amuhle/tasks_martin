@@ -31,7 +31,8 @@ gem 'rspec-rails'
 
 gem 'shoulda-matchers'
 
-gem 'pry', :group => [:development, :test]
+#gem 'pry', :group => [:development, :test]
+
 
 
 
@@ -48,4 +49,4 @@ gem 'pry', :group => [:development, :test]
 # gem 'capistrano'
 
 # To use debugger
-# gem 'debugger'
+gem 'debugger', group: [:development, :test]
