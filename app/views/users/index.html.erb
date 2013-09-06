@@ -24,7 +24,9 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><img class="image_width" src="http://upload.wikimedia.org/wikipedia/commons/f/f6/Bright_green_tree_-_Waikato.jpg"></td>
+        <td>
+          <%= image_tag user.photo.url(:small) %>
+        </td>
         <td><%= user.id %></td>
         <td><%= user.name %></td>
         <td><%= user.email %></td>
