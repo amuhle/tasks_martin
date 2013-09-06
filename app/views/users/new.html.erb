@@ -1,6 +1,4 @@
-<div class="navbar">
-  <div class="navbar-inner">
-    <b class="brand" >New User</b>
-  </div>
-</div>
+<% content_for :links do %>
+	<b class="brand" >New User</b>
+<% end %>
 <%= render :partial => 'form' %>

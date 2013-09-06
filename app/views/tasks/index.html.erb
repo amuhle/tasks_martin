@@ -1,13 +1,11 @@
 <%- model_class = Task -%>
-<div class="navbar">
-  <div class="navbar-inner">
+<% content_for :links do %>
     <b class="brand" >Tasks</b>
     <ul class="nav">
       <li><a href="<%= system_tasks_users_path%>">System Tasks</a></li>
       <li><a href="<%= users_path%>">System Users</a></li>
     </ul>
-  </div>
-</div>
+<% end %>
 
 <table class="table table table-hover">
   <thead>
@@ -34,14 +32,22 @@
         <td><%=l task.created_at %></td>
         <td>
           <%= link_to 'Show', [@user, task], :class => 'btn btn-mini'%>
-          <%= link_to 'Edit', edit_user_task_path(@user, task), :class => 'btn btn-mini btn-info' %>
+          <%= if current_user.id.equal?(@user.id)
+                link_to 'Edit', edit_user_task_path(@user, task), :class => 'btn btn-mini btn-info'
+              end
+          %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
+<%= if current_user.id.equal?(@user.id)
+      link_to t('.new', :default => t("helpers.links.new")),
             new_user_task_path(@user),
-            :class => 'btn btn-primary' %>
+            :class => 'btn btn-primary'
+    end
+%>
+<%= link_to "Cancel",
+                users_path, :class => 'btn' %>
 

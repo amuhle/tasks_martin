@@ -8,8 +8,47 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require_self
- *= require bootstrap_and_overrides
 
+ *= require bootstrap_and_overrides
+ *= require_self
  *= require users
  */
+
+#user_nav{
+	float: right;
+	padding: 30px 10px 10px;
+	color: #FAF0F0;
+}
+
+#user_nav a:hover{
+	color: #E7E4D1;
+}
+
+.remember-me{
+	text-align: right;
+	width: 233px;
+}
+
+.inline{
+	display: inline;
+	margin: 0;
+}
+
+#basic_attributes{
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color: gray;
+}
+
+.info_password{
+	font-size: 12px;
+	font-style: italic;
+}
+
+.table td{
+	vertical-align: middle;
+}
+
+.image_width{
+	width: 50px;
+}

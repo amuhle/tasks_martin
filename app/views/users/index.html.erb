@@ -1,16 +1,16 @@
 <%- model_class = User -%>
-<div class="navbar">
-  <div class="navbar-inner">
-    <b class="brand" >Users</b>
-    <ul class="nav">
-      <li><a href="<%= system_tasks_users_path%>">System Tasks</a></li>
-    </ul>
-  </div>
-</div>
+
+<% content_for :links do %>
+  <b class="brand" >Users</b>
+  <ul class="nav">
+    <li><a href="<%= system_tasks_users_path%>">System Tasks</a></li>
+  </ul>
+<% end %>
 
 <table class="table table table-hover">
   <thead>
     <tr>
+      <th>Image</th>
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:email) %></th>
@@ -24,6 +24,7 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
+        <td><img class="image_width" src="http://upload.wikimedia.org/wikipedia/commons/f/f6/Bright_green_tree_-_Waikato.jpg"></td>
         <td><%= user.id %></td>
         <td><%= user.name %></td>
         <td><%= user.email %></td>
@@ -32,17 +33,21 @@
         <td><%= user.status %></td>
         <td><%=l user.created_at %></td>
         <td>
-          <%= link_to 'Show', user_path(user), :class => 'btn btn-mini' %>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_user_path(user), :class => 'btn btn-mini btn-info' %>
+          <%= link_to 'Show', user_path(user), :class => 'btn btn-small' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       user_path(user),
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'delete_user btn btn-mini btn-danger' %>
+                      :class => 'delete_user btn btn-small btn-danger' %>
 
-          <%= link_to 'Show Tasks', user_tasks_path(user), :class => 'btn btn-mini show_tasks'%>
-          <%= link_to 'New Task', new_user_task_path(user), :class => 'btn btn-mini new_task' %>
+          <%= link_to 'Show Tasks', user_tasks_path(user), :class => 'btn btn-small show_tasks'%>
+          <%= link_to 'New Task', new_user_task_path(user), :class => 'btn btn-small new_task' %>
+          <%=
+          if current_user and current_user.id.equal?(user.id)
+                link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_user_registration_path, :class => 'btn btn-small btn-info'
+              end
+          %>
         </td>
         <input type="hidden" value="<%= user.id %>" class="user_id" />
       </tr>
@@ -50,6 +55,6 @@
   </tbody>
 </table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
+<%#= link_to t('.new', :default => t("helpers.links.new")),
             new_user_path,
             :class => 'btn btn-primary' %>

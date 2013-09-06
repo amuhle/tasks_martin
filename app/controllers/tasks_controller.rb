@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
 
 	before_filter :get_user
+  before_filter :authenticate_user!, except: [:index, :show]
 
 	def get_user
 		@user = User.find(params[:user_id])
@@ -11,7 +12,12 @@ class TasksController < ApplicationController
   end
 
   def new
-  	@task = Task.new
+    if current_user.id.equal?(@user.id)
+      @task = Task.new
+    else
+      flash[:error] = "Not authorized to create new Task for this User"
+      redirect_to users_path
+    end
   end
 
   def edit

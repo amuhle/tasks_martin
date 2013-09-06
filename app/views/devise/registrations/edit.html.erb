@@ -1,0 +1,37 @@
+<% content_for :links do %>
+  <b class="brand" >Edit User</b>
+<% end %>
+
+<!--registration_path(resource_name)-->
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => 'form-horizontal' }) do |f| %>
+
+  <div id="basic_attributes">
+    <%= render_error(resource,f,:name) %>
+    <%= render_error(resource,f,:phone) %>
+    <%= render_error(resource,f,:role) %>
+    <%= render_error(resource,f,:email) %>
+  </div><br>
+
+  <div>
+    <%= f.label :password, class: "inline"%>
+    <i class="info_password">(leave blank if you don't want to change it)</i><br/>
+    <%= f.password_field :password, :autocomplete => "off" %>
+  </div><br/>
+
+  <div><%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation %></div><br/>
+
+  <%= render_error(resource,f,:current_password) %>
+
+  <div class="form-actions">
+    <%= f.submit "Edit", :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                users_path, :class => 'btn' %>
+  </div>
+<% end %>
+
+<!--<h3>Cancel my account</h3>
+
+<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %>.</p>
+
+<%= link_to "Back", :back %>-->

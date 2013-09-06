@@ -31,9 +31,11 @@ gem 'rspec-rails'
 
 gem 'shoulda-matchers'
 
+gem 'devise'
+
+gem "paperclip"
+
 #gem 'pry', :group => [:development, :test]
-
-
 
 
 # To use ActiveModel has_secure_password

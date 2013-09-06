@@ -12,9 +12,12 @@ $( document ).ready(function() {
 		  	if(data.status=="saved"){
       		$(this).parent().closest('tr').fadeOut();
       	}
-      	else{
+      	else if(data.status=="unsaved"){
       		console.log("problems saving the user status");
       	}
+        else{
+          alert("Not authorized to delete the User");
+        }
    		},
      	error: function(data){
      	}

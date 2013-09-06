@@ -1,26 +1,58 @@
 <%- model_class = User -%>
-<div class="navbar">
-  <div class="navbar-inner">
-    <b class="brand" >Show User</b>
+<% content_for :links do %>
+  <b class="brand" >Show User</b>
+<% end %>
+
+
+<!--<div class="container">
+  <div class="row">
+    <div class="span3">
+      <img src="http://thetransformedmale.files.wordpress.com/2011/06/bruce-wayne-armani.jpg" class="img-rounded">
+    </div>
+    <div class="span9">
+      <blockquote>
+        <p>Bruce Wayne</p>
+        <small><cite title="Source Title">Gotham, United Kingdom  <i class="icon-map-marker"></i></cite></small>
+      </blockquote>
+      <p>
+        <i class="icon-envelope"></i> masterwayne@batman.com <br>
+        <i class="icon-globe"></i> www.bootsnipp.com <br>
+        <i class="icon-gift"></i> January 30, 1974
+      </p>
+    </div>
+  </div>
+</div>-->
+
+<div class="container">
+  <div class="row">
+    <div class="span3">
+      <img src="http://upload.wikimedia.org/wikipedia/commons/f/f6/Bright_green_tree_-_Waikato.jpg" class="img-rounded">
+    </div>
+    <div class="span9">
+      <dl class="dl-horizontal">
+        <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+        <dd><%= @user.name %></dd>
+        <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
+        <dd><%= @user.email %></dd>
+        <dt><strong><%= model_class.human_attribute_name(:phone) %>:</strong></dt>
+        <dd><%= @user.phone %></dd>
+        <dt><strong><%= model_class.human_attribute_name(:role) %>:</strong></dt>
+        <dd><%= @user.role %></dd>
+        <dt><strong><%= model_class.human_attribute_name(:status) %>:</strong></dt>
+        <dd><%= @user.status %></dd>
+      </dl>
+    </div>
   </div>
 </div>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%= @user.name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
-  <dd><%= @user.email %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:phone) %>:</strong></dt>
-  <dd><%= @user.phone %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:role) %>:</strong></dt>
-  <dd><%= @user.role %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:status) %>:</strong></dt>
-  <dd><%= @user.status %></dd>
-</dl>
+
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
-              users_path, :class => 'btn'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_user_path(@user), :class => 'btn' %>
+              :back, :class => 'btn'  %>
+  <%= if current_user.id.equal?(@user.id)
+        link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_user_registration_path, :class => 'btn btn-primary'
+      end
+  %>
 </div>

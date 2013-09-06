@@ -1,6 +1,9 @@
 Tasks::Application.routes.draw do
 
-  resources :users, except: :destroy do
+  devise_for :users
+  #devise_for :users, :controllers => {:registrations => "custom_registrations"}
+
+  resources :users, except: [:destroy, :new, :create, :edit, :update] do
     put :delete_status, on: :member
     get :system_tasks, on: :collection
     get :reasign_task, on: :collection
