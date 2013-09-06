@@ -1,0 +1,40 @@
+<%- model_class = Task -%>
+<% content_for :links do %>
+    <b class="brand" >Sistem Tasks</b>
+<% end %>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:title) %></th>
+      <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><%= model_class.human_attribute_name(:time_to_finish) %></th>
+      <th><%= model_class.human_attribute_name(:status) %></th>
+      <th><%= model_class.human_attribute_name(:user_id) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th>User assigned</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.id %></td>
+        <td><%= task.title %></td>
+        <td><%= task.description %></td>
+        <td><%= task.time_to_finish %></td>
+        <td><%= task.status %></td>
+        <td><%= task.user_id %></td>
+        <td><%=l task.created_at %></td>
+        <td><%= select_tag "task[user]", options_from_collection_for_select(User.all, 'id', 'name', task.user_id), data: {
+            remote: true,
+            url: url_for( action: 'reasign_task', task_id: task.id)
+          } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "Back",
+            users_path,
+            :class => 'btn btn-primary' %>

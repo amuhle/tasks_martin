@@ -1,21 +1,26 @@
-<%= form_for([@user, @task]) do |f| %>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_field :description %>
+<%= form_for [@user, @task], :html => { :class => 'form-horizontal' } do |f| %>
+
+  <%= render_error(@task,f,:title) %>
+
+  <%= render_error(@task,f,:description) %>
+
+  <div class="control-group">
+    <%= f.label :time_to_finish, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.date_select :time_to_finish, :class => 'date_select' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :status %><br />
-    <%= f.select :status, ['unstarted','started','finished'] %>
+
+  <div class="control-group">
+    <%= f.label :status, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :status, Task::STATUS %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :time_to_finish %><br />
-    <%= f.date_select(:time_to_finish)%>
-  </div>
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to "Back",
+                :back, :class => 'btn' %>
   </div>
 <% end %>

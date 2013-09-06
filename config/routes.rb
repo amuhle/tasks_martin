@@ -1,16 +1,15 @@
 Tasks::Application.routes.draw do
-  #get "tasks/index"
-  #get "tasks/new"
 
-  resources :users, except: :destroy do
-    resources :tasks, except: [:destroy]
+  devise_for :users
+  #devise_for :users, :controllers => {:registrations => "custom_registrations"}
+
+  resources :users, except: [:destroy, :new, :create, :edit, :update] do
+    put :delete_status, on: :member
+    get :system_tasks, on: :collection
+    get :reasign_task, on: :collection
+    resources :tasks, except: :destroy
   end
 
-
-  #get "users/edit"
-  #get "users/index"
-  #get "users/new"
-  #get "users/show"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,0 +1,20 @@
+<% content_for :links do %>
+	<b class="brand" >Sing In</b>
+<% end %>
+
+<%= form_for(resource, :as => resource_name, :url => user_session_path, :html => { :class => 'form-horizontal' }) do |f| %>
+
+	<%= render_error(resource,f,:email) %>
+  <%= render_error(resource,f,:password) %>
+
+  <% if devise_mapping.rememberable? -%>
+    <div class="remember-me"><%= f.check_box :remember_me, class: 'inline' %> <%= f.label :remember_me, class: 'inline'%></div>
+  <% end -%>
+
+  <div class="form-actions">
+    <%= f.submit "Sign in", :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                users_path, :class => 'btn' %> <br><br>
+  	<%= render "devise/shared/links" %>
+  </div>
+<% end %>

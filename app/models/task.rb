@@ -1,5 +1,9 @@
 class Task < ActiveRecord::Base
-  attr_accessible :description, :status, :time_to_finish, :title
+  attr_accessible :description, :status, :time_to_finish, :title, :created_at
+  validates_presence_of :description, :status, :time_to_finish, :title, :user
 
   belongs_to :user
+
+  STATUS = ['unstarted','started','finished']
+
 end

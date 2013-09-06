@@ -1,26 +1,53 @@
-<h1>Tasks#index</h1>
-
-<table border="1">
-  <tr>
-    <th>Description</th>
-    <th>Status</th>
-    <th>Time to Finish</th>
-    <th>Title</th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @tasks.each do |task| %>
-  <tr>
-    <td><%= task.description %></td>
-    <td><%= task.status %></td>
-    <td><%= task.time_to_finish %></td>
-    <td><%= task.title %></td>
-    <td><%= link_to 'Show', [@user, task] %></td>
-    <td><%= link_to 'Edit', edit_user_task_path(@user, task) %></td>
-  </tr>
+<%- model_class = Task -%>
+<% content_for :links do %>
+    <b class="brand" >Tasks</b>
+    <ul class="nav">
+      <li><a href="<%= system_tasks_users_path%>">System Tasks</a></li>
+      <li><a href="<%= users_path%>">System Users</a></li>
+    </ul>
 <% end %>
+
+<table class="table table table-hover">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:title) %></th>
+      <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><%= model_class.human_attribute_name(:time_to_finish) %></th>
+      <th><%= model_class.human_attribute_name(:status) %></th>
+      <th><%= model_class.human_attribute_name(:user_id) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.id %></td>
+        <td><%= task.title %></td>
+        <td><%= task.description %></td>
+        <td><%= task.time_to_finish %></td>
+        <td><%= task.status %></td>
+        <td><%= task.user_id %></td>
+        <td><%=l task.created_at %></td>
+        <td>
+          <%= link_to 'Show', [@user, task], :class => 'btn btn-mini'%>
+          <%= if current_user.id.equal?(@user.id)
+                link_to 'Edit', edit_user_task_path(@user, task), :class => 'btn btn-mini btn-info'
+              end
+          %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
-<%= link_to 'New Task', new_user_task_path(@user) %></td>
+<%= if current_user.id.equal?(@user.id)
+      link_to t('.new', :default => t("helpers.links.new")),
+            new_user_task_path(@user),
+            :class => 'btn btn-primary'
+    end
+%>
+<%= link_to "Cancel",
+                users_path, :class => 'btn' %>
 

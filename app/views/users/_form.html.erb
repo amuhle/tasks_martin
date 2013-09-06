@@ -1,22 +1,16 @@
-<%= form_for(@user) do |f| %>
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :phone %><br />
-    <%= f.text_field :phone %>
-  </div>
-  <div class="field">
-    <%= f.label :role %><br />
-    <%= f.text_field :role %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+<%= form_for @user, :html => { :class => 'form-horizontal' } do |f| %>
+
+  <%= render_error(@user,f,:name) %>
+
+  <%= render_error(@user,f,:email) %>
+
+  <%= render_error(@user,f,:phone) %>
+
+  <%= render_error(@user,f,:role) %>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                users_path, :class => 'btn' %>
   </div>
 <% end %>
-
